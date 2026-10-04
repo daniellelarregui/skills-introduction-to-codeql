@@ -11,12 +11,11 @@ def index():
     author = request.args.get('author')
     read = bool(request.args.get('read'))
 
-       if name:
-        # VULNERABLE: directly concatenating user input into SQL
-        query = "SELECT * FROM books WHERE name LIKE '%" + name + "%'"
-        cursor.execute(query)
+    if name:
+        cursor.execute(
+            "SELECT * FROM books WHERE name LIKE %s", name
+        )
         books = [Book(*row) for row in cursor]
-
 
     elif author:
         cursor.execute(
