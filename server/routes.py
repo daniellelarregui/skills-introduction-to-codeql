@@ -28,5 +28,4 @@ def index():
         cursor.execute("SELECT name, author, read FROM books")
         books = [Book(*row) for row in cursor]
         
-    return render_template('books.html', books=books, message=request.args.get('message'))
-
+    return render_template('books.html', books=books)
